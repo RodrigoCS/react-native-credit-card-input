@@ -9,7 +9,10 @@ import {
 
 import defaultIcons from "./Icons";
 import FlipCard from "react-native-flip-card";
+import CachedImage from 'react-native-cached-image';
 
+const Img = CachedImage || Image
+const ImgBackground = CachedImage || ImageBackground
 const BASE_SIZE = { width: 300, height: 190 };
 
 const s = StyleSheet.create({
@@ -131,9 +134,9 @@ export default class CardView extends Component {
             perspective={2000}
             clickable={false}
             flip={shouldFlip}>
-          <Image style={[BASE_SIZE, s.cardFace, transform]}
+          <ImgBackground style={[BASE_SIZE, s.cardFace, transform]}
               source={imageFront}>
-              <Image style={[s.icon]}
+              <Img style={[s.icon]}
                   source={Icons[brand]} />
               <Text style={[s.baseText, { fontFamily }, s.number, !number && s.placeholder, focused === "number" && s.focused]}>
                 { !number ? placeholder.number : number }
@@ -152,13 +155,13 @@ export default class CardView extends Component {
                   <Text style={[s.baseText, { fontFamily }, s.amexCVC, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
                     { !cvc ? placeholder.cvc : cvc }
                   </Text> }
-          </Image>
-          <Image style={[BASE_SIZE, s.cardFace, transform]}
+          </ImgBackground>
+          <ImgBackground style={[BASE_SIZE, s.cardFace, transform]}
               source={imageBack}>
               <Text style={[s.baseText, s.cvc, !cvc && s.placeholder, focused === "cvc" && s.focused]}>
                 { !cvc ? placeholder.cvc : cvc }
               </Text>
-          </Image>
+          </ImgBackground>
         </FlipCard>
       </View>
     );
